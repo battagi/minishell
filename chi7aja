@@ -1,0 +1,26 @@
+void	remove_env_var(t_env **env, t_cmd *cmd, int i)
+{
+	t_env	*tmp;
+	t_env	*prev;
+
+	tmp = *env;
+	prev = NULL;
+	while (tmp != NULL)
+	{
+		if (ft_strncmp(tmp->before_equal, cmd->cmd[i],
+				ft_strlen(cmd->cmd[i])) == 0
+			&& ft_strlen(cmd->cmd[i]) == ft_strlen(tmp->before_equal))
+		{
+			if (prev == NULL)
+				*env = tmp->next;
+			else
+				prev->next = tmp->next;
+			free(tmp->before_equal);
+			free(tmp->after_equal);
+			free(tmp);
+			break ;
+		}
+		prev = tmp;
+		tmp = tmp->next;
+	}
+}
