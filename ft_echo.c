@@ -1,53 +1,56 @@
-#include <unistd.h>
-#include <string.h>
 
-int check_n(char *str)
+#include "builtin.h"
+
+// Function to check if the argument is "-n"
+int	all_n(char	*tab)
 {
-    int i;
-
-    i = 0;
-    if (!str)
-        return (0);
-    if (str[0] == '-')
-        i++;
-    while (str[i])
-    {
-        if (str[i] != 'n')
-            return (0);
-        i++;
-    }
-    return (1);
+	if (*tab != '-') // Check if it starts with '-'
+		return (0);
+	tab++; // Move to the next character
+	while (*tab) // Check all following characters
+	{
+		if (*tab != 'n') // If not 'n', return false
+			return (0);
+		tab++; // Move to the next character
+	}
+	return (1); // All characters are 'n'
 }
 
-int main(int argc, char *argv[], char **env) {
-    // i did this flag to check if the -n flag is set
-    int print_newline = 1; 
+// Function to print the arguments
+void	print_arguments(char **arg)
+{
+	int	i = 0; // Index for arguments
 
-    //check if the first argument is -n
-    if (argc > 1 && check_n(argv[1]) == 1) {
-        print_newline = 0; 
-        int i = 1;
-        while (i < argc - 1) {
-            argv[i] = argv[i + 1];
-            i++;
-        }
-        argc--; 
-    }
+	while (arg[i])
+	{
+		if (arg[i + 1]) // If not the last argument
+			printf("%s ", arg[i]); // Print with a space
+		else
+			printf("%s", arg[i]); // Print the last argument without a space
+		i++; // Move to the next argument
+	}
+}
 
-    // so i print each arguments in the terminal
-    int i = 1;
-    while (i < argc) {
-        size_t len = strlen(argv[i]);
-        write(1, argv[i], len); 
-        if (i < argc - 1) {
-            write(1, " ", 1);
-        }
-        i++;
-    }
+// Echo function implementation
+void	ft_echo(char **arg)
+{
+	int	i = 1; // Start from the first argument
+	int	no_line = 0; // Flag for new line
 
-    if (print_newline) {
-        write(1, "\n", 1); 
-    }
+	g_glb.ex = 0; // Reset error code
+	if (!arg[1]) // If no arguments, print newline
+	{
+		printf("\n");
+		return;
+	}
 
-    return 0;
+	// Check if the first argument is "-n"
+	if (all_n(arg[1]))
+		no_line = 1; // Set flag if it is
+	if (no_line)
+		i++; // Skip the "-n" argument
+
+	print_arguments(&arg[i]); // Print the remaining arguments
+	if (!no_line) // If not using -n
+		printf("\n"); // Print a newline at the end
 }
