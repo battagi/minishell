@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   allocptr.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 18:42:32 by abattagi          #+#    #+#             */
+/*   Updated: 2024/12/02 18:47:34 by abattagi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void Tslash(char **path)
+void	Tslash(char **path)
 {
-	char *tmp;
-	int i;
+	char	*tmp;
+	int		i;
 
 	i = 0;
 	while (path[i])
@@ -14,10 +26,10 @@ void Tslash(char **path)
 		i++;
 	}
 }
-int size_env(t_env **env)
+int	size_env(t_env **env)
 {
-	t_env *tmp;
-	int cnt;
+	t_env	*tmp;
+	int		cnt;
 
 	if (!env)
 		return (0);
@@ -31,12 +43,12 @@ int size_env(t_env **env)
 	}
 	return (cnt);
 }
-char **env_to_envp(t_env **env)
+char	**env_to_envp(t_env **env)
 {
-	char **envp;
-	t_env *tmp;
-	char *fr;
-	int i;
+	char	**envp;
+	t_env	*tmp;
+	char	*fr;
+	int		i;
 
 	i = 0;
 	if (!env)
@@ -57,9 +69,9 @@ char **env_to_envp(t_env **env)
 	envp[i] = 0;
 	return (envp);
 }
-t_env *getEnvarement(t_env **env, char *key)
+t_env	*getEnvarement(t_env **env, char *key)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = *env;
 	if (!env)
@@ -68,15 +80,13 @@ t_env *getEnvarement(t_env **env, char *key)
 	{
 		if (!ft_strcmp(tmp->key, key)) // dir !
 		{
-
 			return (tmp);
 		}
 		tmp = tmp->next;
 	}
-
 	return (0);
 }
-void allocptr(t_extra *ptr, t_env **tmp, t_env **env)
+void	allocptr(t_extra *ptr, t_env **tmp, t_env **env)
 {
 	t_env *mis;
 

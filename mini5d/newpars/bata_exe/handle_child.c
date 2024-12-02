@@ -1,5 +1,16 @@
-#include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_child.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 18:44:17 by abattagi          #+#    #+#             */
+/*   Updated: 2024/12/02 18:44:21 by abattagi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../minishell.h"
 
 void	condition_dup(t_extra ptr)
 {
@@ -19,7 +30,7 @@ void	output_cmd(t_red *out, t_extra ptr)
 	}
 	while (tmp)
 	{
-		if ((tmp->type == RED_OUT  || tmp->type == RED_APP) && assining_out(tmp,
+		if ((tmp->type == RED_OUT || tmp->type == RED_APP) && assining_out(tmp,
 				&fd))
 		{
 			if (tmp->next)
@@ -73,7 +84,6 @@ void	input_cmd(t_red *in, t_extra ptr, char **cmd)
 }
 void	handle_child(t_command *cmd, t_env **env, t_extra ptr)
 {
-
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 	input_cmd(cmd->in, ptr, cmd->args);

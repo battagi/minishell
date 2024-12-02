@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 18:42:47 by abattagi          #+#    #+#             */
+/*   Updated: 2024/12/02 18:42:51 by abattagi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void exec_builtins(t_command *cmd, t_env **env)
+void	exec_builtins(t_command *cmd, t_env **env)
 {
-	int fd;
+	int	fd;
 
 	if (!open_files(&fd, cmd))
-		return;
+		return ;
 	if (ft_strcmp(cmd->name, "pwd") == 0)
 		pwd();
 	else if (ft_strcmp(cmd->name, "cd") == 0)
@@ -26,10 +38,10 @@ void exec_builtins(t_command *cmd, t_env **env)
 		close(fd);
 	}
 }
-int **alloc_tube(int size)
+int	**alloc_tube(int size)
 {
-	int **tube;
-	int i;
+	int	**tube;
+	int	i;
 
 	i = 0;
 	tube = malloc(sizeof(int *) * size);
@@ -44,9 +56,9 @@ int **alloc_tube(int size)
 	}
 	return (tube);
 }
-int open_pipes(int **tube, int size)
+int	open_pipes(int **tube, int size)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < size)
@@ -57,10 +69,10 @@ int open_pipes(int **tube, int size)
 	}
 	return (1);
 }
-int **builtins_tube(t_command **list, t_env **env, int size)
+int	**builtins_tube(t_command **list, t_env **env, int size)
 {
-	int **tube;
-	t_command *cmd;
+	int			**tube;
+	t_command	*cmd;
 
 	cmd = *list;
 	// printf("%d %s\n", size, cmd->name);
@@ -73,7 +85,6 @@ int **builtins_tube(t_command **list, t_env **env, int size)
 	tube = alloc_tube(size);
 	if (!open_pipes(tube, size) || !tube)
 	{
-
 		write(2, "ERROR : open_pipe ou allocation\n", 32);
 		g_glb.ex = -1;
 		closingB(tube, size);
@@ -81,19 +92,20 @@ int **builtins_tube(t_command **list, t_env **env, int size)
 	}
 	return (tube);
 }
-void execution(t_command **list, t_env **env)
+void	execution(t_command **list, t_env **env)
 {
-	t_extra ptr;
-	t_command *cmd;
-	t_env *tmp;
+	t_extra		ptr;
+	t_command	*cmd;
+	t_env		*tmp;
+
 	cmd = *list;
 	ptr.i = 0;
 	ptr.size = ft_size_list(*list) - 1;
 	ptr.tube = builtins_tube(list, env, ptr.size);
 	if (!ptr.tube)
-		return;
-
+		return ;
 	allocptr(&ptr, &tmp, env);
+	get_herdoc(&cmd, *env);
 	// printf("ptr.size = %d\n ptr.path %s\n", ptr.size, ptr.path);
 	while (ptr.i <= ptr.size)
 	{

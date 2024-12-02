@@ -1,5 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2024/12/02 18:44:11 by abattagi          #+#    #+#             */
+/*   Updated: 2024/12/02 18:44:11 by abattagi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
-static char *read_from_fd(int fd, char *reminder, char *buffer)
+
+static char	*read_from_fd(int fd, char *reminder, char *buffer)
 {
 	int read_counter;
 	char *temp;
@@ -9,7 +25,7 @@ static char *read_from_fd(int fd, char *reminder, char *buffer)
 	{
 		read_counter = read(fd, buffer, BUFFER_SIZE);
 		if (read_counter == 0)
-			break;
+			break ;
 		buffer[read_counter] = '\0';
 		if (reminder == NULL)
 			reminder = ft_strdup("");
@@ -18,14 +34,14 @@ static char *read_from_fd(int fd, char *reminder, char *buffer)
 		free(temp);
 		temp = NULL;
 		if (ft_strchr(reminder, '\n') != NULL)
-			break;
+			break ;
 	}
 	if (read_counter == -1)
 		return (NULL);
 	return (reminder);
 }
 
-static char *next_line_remind(char *line)
+static char	*next_line_remind(char *line)
 {
 	size_t i;
 	char *reminder;
@@ -45,7 +61,7 @@ static char *next_line_remind(char *line)
 	return (reminder);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static char *reminder;
 	char *line;

@@ -1,4 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2024/12/02 18:44:37 by abattagi          #+#    #+#             */
+/*   Updated: 2024/12/02 18:44:37 by abattagi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
+
+
 void	ft_lstadd_back_env(t_env **lst, t_env *new)
 {
 	if (!*lst)
@@ -39,8 +56,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-
-
 char	**ft_strplit(char *env)
 {
 	int i;
@@ -61,7 +76,6 @@ char	**ft_strplit(char *env)
 	str[2] = 0;
 	return (str);
 }
-
 
 void	export_error(char *exp)
 {

@@ -1,8 +1,24 @@
-#include"minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_child2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
+/*   Created: 2024/12/02 18:44:23 by abattagi          #+#    #+#             */
+/*   Updated: 2024/12/02 18:44:23 by abattagi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+
 
 void	slash_exec(char **arg, char **envp)
 {
-	struct stat	m;
+	struct stat m;
 
 	if (stat(arg[0], &m) == -1)
 		return ;
@@ -14,7 +30,7 @@ void	slash_exec(char **arg, char **envp)
 }
 int	there_is_slash(char *arg)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (arg[i])
@@ -27,12 +43,11 @@ int	there_is_slash(char *arg)
 }
 void	handle_exec(char **path, t_command *list, t_env **env, char **envp)
 {
-	int		i;
-	char	*tmp;
+	int i;
+	char *tmp;
 
 	i = 0;
 
-	
 	if (there_is_slash(list->args[0]))
 		slash_exec(list->args, envp);
 	if (is_builting(list))
@@ -44,7 +59,6 @@ void	handle_exec(char **path, t_command *list, t_env **env, char **envp)
 	}
 	else
 	{
-
 		while (getEnvarement(env, "PATH") && path[i])
 		{
 			tmp = ft_strjoin(path[i], list->args[0]);

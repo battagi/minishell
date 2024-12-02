@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleaning.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 18:42:40 by abattagi          #+#    #+#             */
+/*   Updated: 2024/12/02 18:42:44 by abattagi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
+
 void	free_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!tab)
@@ -15,8 +28,8 @@ void	free_tab(char **tab)
 }
 void	ft_free_wait(t_extra ptr)
 {
-	int	i;
-	int	status;
+	int i;
+	int status;
 
 	free_tab(ptr.path);
 	free_tab(ptr.envp);
