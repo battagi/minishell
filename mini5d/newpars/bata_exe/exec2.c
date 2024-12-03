@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
+/*                                                    +:+ +:+
 	+:+     */
-/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+      
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+
 	+#+        */
-/*                                                +#+#+#+#+#+  
+/*                                                +#+#+#+#+#+
 	+#+           */
 /*   Created: 2024/12/02 18:42:52 by abattagi          #+#    #+#             */
 /*   Updated: 2024/12/02 18:42:52 by abattagi         ###   ########.fr       */
@@ -17,7 +17,7 @@
 
 int	input_builtins(t_red *in)
 {
-	t_red *tmp;
+	t_red	*tmp;
 
 	tmp = in;
 	if (!tmp)
@@ -33,6 +33,7 @@ int	input_builtins(t_red *in)
 	}
 	return (1);
 }
+
 int	out_fd_assign(t_red *tmp, int *fd)
 {
 	if (tmp->type == RED_OUT)
@@ -46,20 +47,22 @@ int	out_fd_assign(t_red *tmp, int *fd)
 	}
 	return (1);
 }
+
 void	duplicate_fd(int *ret, int fd)
 {
 	*ret = dup(1);
 	dup2(fd, 1);
 	close(fd);
 }
+
 int	output_builtins(t_red *out)
 {
-	t_red *tmp;
-	int fd;
-	int ret;
+	t_red			*tmp;
+	int				fd;
+	int				ret;
 
-	ret = 0;
 	tmp = out;
+	ret = 0;
 	if (!tmp)
 		return (-2);
 	while (tmp)
@@ -78,6 +81,7 @@ int	output_builtins(t_red *out)
 	}
 	return (ret);
 }
+
 int	open_files(int *fd, t_command *cmd)
 {
 	if (!input_builtins(cmd->in))
@@ -87,7 +91,6 @@ int	open_files(int *fd, t_command *cmd)
 	}
 	*fd = output_builtins(cmd->out);
 	if (*fd == -1)
-	// printf("******************************r>??**************zbi********************************************\n");
 	{
 		g_glb.ex = 1;
 		return (0);

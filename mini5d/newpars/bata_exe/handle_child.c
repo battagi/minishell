@@ -6,7 +6,7 @@
 /*   By: abattagi <abattagi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:44:17 by abattagi          #+#    #+#             */
-/*   Updated: 2024/12/02 18:44:21 by abattagi         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:16:19 by abattagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	output_cmd(t_red *out, t_extra ptr)
 		tmp = tmp->next;
 	}
 }
-void	assaining_in(t_red *tmp)
-{
-	int	fd;
 
-	fd = open(tmp->value, O_RDONLY);
+void	assaining_in(t_red *tmp, int fd)
+{
+	if (fd == -2)
+		fd = open(tmp->value, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("ERROR");
@@ -61,7 +61,8 @@ void	assaining_in(t_red *tmp)
 	else
 		dup2(fd, 0);
 }
-void	input_cmd(t_red *in, t_extra ptr, char **cmd)
+
+void	input_cmd(t_red *in, t_extra ptr, char **cmd, int fd)
 {
 	t_red	*tmp;
 
@@ -76,19 +77,21 @@ void	input_cmd(t_red *in, t_extra ptr, char **cmd)
 	while (tmp)
 	{
 		if (tmp->type == RED_IN)
-			assaining_in(tmp);
-		// else if (tmp->type == HERDOC && !tmp->next)
+			assaining_in(tmp, -2);
+		else if (tmp->type == HERE_DOC && !tmp->next)
+			assaining_in(tmp, fd);
 		// 	read_herdoc(cmd, tmp);
 		tmp = tmp->next;
 	}
 }
+
 void	handle_child(t_command *cmd, t_env **env, t_extra ptr)
 {
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
-	input_cmd(cmd->in, ptr, cmd->args);
+	input_cmd(cmd->in, ptr, cmd->args, cmd->fd);
 	output_cmd(cmd->out, ptr);
-	closingB(ptr.tube, ptr.size);
+	closingb(ptr.tube, ptr.size);
 	if (cmd->args)
 		handle_exec(ptr.path, cmd, env, ptr.envp);
 	else

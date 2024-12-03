@@ -6,7 +6,7 @@
 /*   By: abattagi <abattagi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:42:47 by abattagi          #+#    #+#             */
-/*   Updated: 2024/12/02 18:42:51 by abattagi         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:56:10 by abattagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	exec_builtins(t_command *cmd, t_env **env)
 		close(fd);
 	}
 }
+
 int	**alloc_tube(int size)
 {
 	int	**tube;
@@ -56,6 +57,7 @@ int	**alloc_tube(int size)
 	}
 	return (tube);
 }
+
 int	open_pipes(int **tube, int size)
 {
 	int	i;
@@ -64,21 +66,20 @@ int	open_pipes(int **tube, int size)
 	while (i < size)
 	{
 		if (pipe(tube[i]) == -1)
-			return (closingB(tube, i));
+			return (closingb(tube, i));
 		i++;
 	}
 	return (1);
 }
+
 int	**builtins_tube(t_command **list, t_env **env, int size)
 {
 	int			**tube;
 	t_command	*cmd;
 
 	cmd = *list;
-	// printf("%d %s\n", size, cmd->name);
 	if (size == 0 && cmd->args && is_builting(cmd))
 	{
-		// printf("enter to exec built\n");
 		exec_builtins(cmd, env);
 		return (NULL);
 	}
@@ -87,11 +88,12 @@ int	**builtins_tube(t_command **list, t_env **env, int size)
 	{
 		write(2, "ERROR : open_pipe ou allocation\n", 32);
 		g_glb.ex = -1;
-		closingB(tube, size);
+		closingb(tube, size);
 		return (NULL);
 	}
 	return (tube);
 }
+
 void	execution(t_command **list, t_env **env)
 {
 	t_extra		ptr;
@@ -106,7 +108,6 @@ void	execution(t_command **list, t_env **env)
 		return ;
 	allocptr(&ptr, &tmp, env);
 	get_herdoc(&cmd, *env);
-	// printf("ptr.size = %d\n ptr.path %s\n", ptr.size, ptr.path);
 	while (ptr.i <= ptr.size)
 	{
 		ptr.pid[ptr.i] = fork();
@@ -115,5 +116,5 @@ void	execution(t_command **list, t_env **env)
 		ptr.i++;
 		cmd = cmd->next;
 	}
-	ft_free_wait(ptr);
+	ft_free_wait(ptr, env);
 }

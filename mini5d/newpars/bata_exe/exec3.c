@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   exec3.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
+/*                                                    +:+ +:+
 	+:+     */
-/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+      
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+
 	+#+        */
-/*                                                +#+#+#+#+#+  
+/*                                                +#+#+#+#+#+
 	+#+           */
 /*   Created: 2024/12/02 18:42:58 by abattagi          #+#    #+#             */
 /*   Updated: 2024/12/02 18:42:58 by abattagi         ###   ########.fr       */
@@ -15,11 +15,10 @@
 
 #include "../minishell.h"
 
-
 int	**prc_allocation(int size)
 {
-	int i;
-	int **tube;
+	int	i;
+	int	**tube;
 
 	i = 0;
 	tube = malloc(sizeof(int *) * size);
@@ -35,7 +34,7 @@ int	**prc_allocation(int size)
 	return (tube);
 }
 
-void	check_Opwd(char **str)
+void	check_o_pwd(char **str)
 {
 	if (ft_strcmp(str[0], "OLDPWD"))
 	{
@@ -46,10 +45,10 @@ void	check_Opwd(char **str)
 
 t_env	*get_env(char **env)
 {
-	char **str;
-	int i;
-	t_env *envp;
-	t_env *tmp;
+	char		**str;
+	int			i;
+	t_env		*envp;
+	t_env		*tmp;
 
 	i = 0;
 	str = NULL;
@@ -57,7 +56,7 @@ t_env	*get_env(char **env)
 	while (env[i])
 	{
 		str = ft_strplit(env[i]);
-		check_Opwd(str);
+		check_o_pwd(str);
 		tmp = ft_lstnew_env(str[0], str[1]);
 		if (ft_strcmp(tmp->key, "_"))
 			tmp->dx = 0;
@@ -69,6 +68,7 @@ t_env	*get_env(char **env)
 	}
 	return (envp);
 }
+
 int	is_builting(t_command *cmd)
 {
 	if (ft_strcmp(cmd->name, "cd") == 0)

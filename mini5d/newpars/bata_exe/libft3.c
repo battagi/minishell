@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   libft3.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
+/*                                                    +:+ +:+
 	+:+     */
-/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+      
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+
 	+#+        */
-/*                                                +#+#+#+#+#+  
+/*                                                +#+#+#+#+#+
 	+#+           */
 /*   Created: 2024/12/02 18:44:37 by abattagi          #+#    #+#             */
 /*   Updated: 2024/12/02 18:44:37 by abattagi         ###   ########.fr       */
@@ -25,6 +25,7 @@ void	ft_lstadd_back_env(t_env **lst, t_env *new)
 	}
 	ft_lstlast_env(*lst)->next = new;
 }
+
 t_env	*ft_lstnew_env(char *key, char *value)
 {
 	t_env *lst;
@@ -37,6 +38,7 @@ t_env	*ft_lstnew_env(char *key, char *value)
 	lst->next = NULL;
 	return (lst);
 }
+
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t i;

@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   libft2.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
+/*                                                    +:+ +:+
 	+:+     */
-/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+      
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+
 	+#+        */
-/*                                                +#+#+#+#+#+  
+/*                                                +#+#+#+#+#+
 	+#+           */
 /*   Created: 2024/12/02 18:44:32 by abattagi          #+#    #+#             */
 /*   Updated: 2024/12/02 18:44:32 by abattagi         ###   ########.fr       */
@@ -42,6 +42,7 @@ int	ft_size_list(t_command *list)
 	}
 	return (cnt);
 }
+
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
@@ -50,11 +51,13 @@ t_list	*ft_lstlast(t_list *lst)
 		lst = lst->next;
 	return (lst);
 }
+
 void	ft_lstadd_front_env(t_env **lst, t_env *new)
 {
 	new->next = *lst;
 	*lst = new;
 }
+
 t_env	*ft_lstlast_env(t_env *lst)
 {
 	if (!lst)

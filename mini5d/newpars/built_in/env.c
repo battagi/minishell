@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amezioun <amezioun@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 12:15:18 by amezioun          #+#    #+#             */
-/*   Updated: 2024/11/25 16:19:21 by amezioun         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:04:33 by abattagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_enva(t_env **env, char **arg)
 
 	tmp = *env;
 	// printf("==>>>>>>>>>>>>>>>>%s=%s\n", tmp->key, tmp->value);
-	if (!getEnvarement(env, "PATH"))
+	if (!get_envarement(env, "PATH"))
 	{
 		write(2, "env: No such file or directory\n", 31);
 		g_glb.ex = 1;

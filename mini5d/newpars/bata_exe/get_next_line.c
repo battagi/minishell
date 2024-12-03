@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
+/*                                                    +:+ +:+
 	+:+     */
-/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+      
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+
 	+#+        */
-/*                                                +#+#+#+#+#+  
+/*                                                +#+#+#+#+#+
 	+#+           */
 /*   Created: 2024/12/02 18:44:11 by abattagi          #+#    #+#             */
 /*   Updated: 2024/12/02 18:44:11 by abattagi         ###   ########.fr       */
@@ -14,6 +14,7 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 
 static char	*read_from_fd(int fd, char *reminder, char *buffer)
 {

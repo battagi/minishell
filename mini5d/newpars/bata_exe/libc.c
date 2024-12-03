@@ -6,7 +6,7 @@
 /*   By: abattagi <abattagi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:44:28 by abattagi          #+#    #+#             */
-/*   Updated: 2024/12/02 18:44:29 by abattagi         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:18:05 by abattagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	condition_name(char *c)
 	}
 	return (1);
 }
+
 void	free_env(t_env *node)
 {
 	free(node->key);
@@ -54,6 +55,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	}
 	return (dest);
 }
+
 void	command_not_found(char **arg, char *mes, int ret)
 {
 	write(2, arg[0], ft_strlen(arg[0]));

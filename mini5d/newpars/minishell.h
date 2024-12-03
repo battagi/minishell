@@ -208,12 +208,12 @@ typedef struct s_list
 }						t_list;
 
 void					handle_child(t_command *cmd, t_env **env, t_extra ptr);
-void					input_cmd(t_red *in, t_extra ptr, char **cmd);
+void					input_cmd(t_red *in, t_extra ptr, char **cmd, int fd);
 void					output_cmd(t_red *out, t_extra ptr);
-void					assaining_in(t_red *tmp);
+void					assaining_in(t_red *tmp,int fd);
 int						assining_out(t_red *tmp, int *fd);
 void					condition_dup(t_extra ptr);
-int						closingB(int **tube, int pos);
+int						closingb(int **tube, int pos);//1
 void					handle_exec(char **path, t_command *list, t_env **env,
 							char **envp);
 int						there_is_slash(char *arg);
@@ -223,13 +223,13 @@ void					slash_exec(char **arg, char **envp);
 // allocptr.............................................
 void					allocptr(t_extra *ptr, t_env **tmp, t_env **env);
 char					**env_to_envp(t_env **env);
-t_env					*getEnvarement(t_env **env, char *key);
-void					Tslash(char **path);
+t_env					*get_envarement(t_env **env, char *key);//2
+void					t_slash(char **path);//3
 int						size_env(t_env **env);
 // ...................................................
 // main.............................................
 t_env					*get_env(char **env);
-void					check_Opwd(char **str);
+void					check_o_pwd(char **str);//4
 int						**prc_allocation(int size);
 void					execution(t_command **list, t_env **env);
 int						**builtins_tube(t_command **list, t_env **env,
@@ -257,7 +257,7 @@ int						open_pipes(int **tube, int size);
 // ...................................................
 // cleaning.............................................
 void					free_tab(char **tab);
-void					ft_free_wait(t_extra ptr);
+void					ft_free_wait(t_extra ptr, t_env **env);
 // ...................................................
 // libft.............................................
 void					command_not_found(char **arg, char *str, int ex);

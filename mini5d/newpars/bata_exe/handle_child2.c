@@ -2,11 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   handle_child2.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
+/*                                                    +:+ +:+
 	+:+     */
-/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+      
+/*   By: abattagi <abattagi@student.42.fr>          +#+  +:+
 	+#+        */
-/*                                                +#+#+#+#+#+  
+/*                                                +#+#+#+#+#+
 	+#+           */
 /*   Created: 2024/12/02 18:44:23 by abattagi          #+#    #+#             */
 /*   Updated: 2024/12/02 18:44:23 by abattagi         ###   ########.fr       */
@@ -28,6 +28,7 @@ void	slash_exec(char **arg, char **envp)
 		command_not_found(arg, ": Permission denied\n", 126);
 	execve(arg[0], arg, envp);
 }
+
 int	there_is_slash(char *arg)
 {
 	int i;
@@ -41,6 +42,7 @@ int	there_is_slash(char *arg)
 	}
 	return (0);
 }
+
 void	handle_exec(char **path, t_command *list, t_env **env, char **envp)
 {
 	int i;
@@ -59,7 +61,7 @@ void	handle_exec(char **path, t_command *list, t_env **env, char **envp)
 	}
 	else
 	{
-		while (getEnvarement(env, "PATH") && path[i])
+		while (get_envarement(env, "PATH") && path[i])
 		{
 			tmp = ft_strjoin(path[i], list->args[0]);
 			if (execve(tmp, list->args, envp) == -1)
@@ -72,7 +74,8 @@ void	handle_exec(char **path, t_command *list, t_env **env, char **envp)
 	update_exit_value(env, 127);
 	command_not_found(list->args, ": command not found\n", 127);
 }
-int	closingB(int **tube, int pos)
+
+int	closingb(int **tube, int pos)
 {
 	while (pos > 0)
 	{
@@ -84,6 +87,7 @@ int	closingB(int **tube, int pos)
 	free(tube);
 	return (0);
 }
+
 int	assining_out(t_red *tmp, int *fd)
 {
 	if (tmp->type == RED_OUT)

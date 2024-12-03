@@ -6,7 +6,7 @@
 /*   By: abattagi <abattagi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:43:50 by abattagi          #+#    #+#             */
-/*   Updated: 2024/12/02 18:43:54 by abattagi         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:14:41 by abattagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*get_value(char *args)
 		return (NULL);
 	return (ft_strdup(equals + 1));
 }
+
 char	*get_name(char *args)
 {
 	char	*equals;
@@ -72,6 +73,7 @@ int	add_env_var(t_env **head, char *key, char *value)
 	tmp->next = new;
 	return (1);
 }
+
 int	ft_charfind(char *str, char c)
 {
 	int	i;
@@ -81,6 +83,7 @@ int	ft_charfind(char *str, char c)
 		i++;
 	return (i);
 }
+
 void	ft_create_env(t_env **head, char **env)
 {
 	char	*name;
@@ -96,6 +99,7 @@ void	ft_create_env(t_env **head, char **env)
 		i++;
 	}
 }
+
 void	ft_print_env(t_env **head)
 {
 	t_env	*tmp;
@@ -107,6 +111,7 @@ void	ft_print_env(t_env **head)
 		tmp = tmp->next;
 	}
 }
+
 
 void	ft_export(t_env **env, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: abattagi <abattagi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:43:16 by abattagi          #+#    #+#             */
-/*   Updated: 2024/12/02 18:43:38 by abattagi         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:14:08 by abattagi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_enva(t_env **env, char **arg)
 	t_env	*tmp;
 
 	tmp = *env;
-	if (!getEnvarement(env, "PATH"))
+	if (!get_envarement(env, "PATH"))
 	{
 		write(2, "env: No such file or directory\n", 31);
 		g_glb.ex = 1;
